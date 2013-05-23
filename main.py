@@ -85,6 +85,8 @@ def main():
     print(classNames)
     print(mainName)
     createMain(mainName, fileNames, classNames)
+    createFile(fileNames)
+    createClass(classNames)
 
 if __name__ == '__main__':
     main()

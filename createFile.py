@@ -5,19 +5,20 @@ def createFile(fileNames):
 
 
 def createCpp(fileName):
-    data = ["using namespace std;"]
+    data = ["using namespace std;", ""]
     writeInFile(fileName + ".cpp", data)
 
 
 def createHpp(fileName):
-    data = ["#IFNDEF "+fileName.upper()+"_HPP", "#DEFINE "+fileName.upper()+"_HPP", "#ENDIF"]
+    data = ["#IFNDEF "+fileName.upper()+"_HPP", "#DEFINE "+fileName.upper()+"_HPP", "#include <iostream> ", "", "#ENDIF"]
     writeInFile(fileName+".hpp", data)
 
 
 def writeInFile(fileName, data):
     toWrite = open(fileName, "w")
     for line in data:
-        toWrite.write(data)
+        line += "\n"
+        toWrite.write(line)
     toWrite.close()
 
 
@@ -29,18 +30,20 @@ def createClass(fileNames):
 
 
 def createHppClass(fileName):
-    data = ["#IFNDEF "+fileName.upper()+"_HPP", "#DEFINE "+fileName.upper()+"_HPP", "#include <iostream> "]
-    data.append("class "+fileName+":")
+    data = ["#IFNDEF "+fileName.upper()+"_HPP", "#DEFINE "+fileName.upper()+"_HPP", "#include <iostream> ", ""]
+    data.append("class "+fileName)
     data.append("{")
     data.append("   public :")
     data.append("       "+fileName+"();")
     data.append("       ~"+fileName+"();")
+    data.append("")
     data.append("   private :")
     data.append("};")
+    data.extend(["", "#ENDIF"])
 
     writeInFile(fileName+".hpp", data)
 
 
 def createCppClass(fileName):
-    data = ["using namespace std;", fileName+"::"+fileName+"()", "{i\n", "}\n", fileName+"::~"+fileName+"()", "{\n", "}"]
+    data = ["using namespace std;", fileName+"::"+fileName+"()", "{\n", "}\n", fileName+"::~"+fileName+"()", "{\n", "}"]
     writeInFile(fileName+".cpp", data)
