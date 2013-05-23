@@ -39,4 +39,5 @@ def createHppClass(fileName):
 
 def createCppClass(fileName):
 	
-		
+	data=["using namespace std;",fileName+"::"+fileName+"()","{i\n","}\n",fileName+"::~"+fileName+"()","{\n","}"]
+	writeInFile(fileName+".cpp",data)		
