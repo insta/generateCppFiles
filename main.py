@@ -7,7 +7,7 @@ def getArgs():
     classNames = []
     fileNames = []
     flag = ""
-    counter = 1
+    boolName = False
     data = True
     for arg in sys.argv[1:]:
         if "-" in arg:
@@ -35,11 +35,11 @@ def getArgs():
                     fileNames.append(arg)
                     data = True
             else:
-                if counter > 1:
+                if boolName:
                     warning(0)
                 else:
                     mainName = arg
-                    counter += 1  # On peut remplacer le compteur par un booléan
+                    boolName = True
     if not data:
         warning(1)
     return mainName, classNames, fileNames
