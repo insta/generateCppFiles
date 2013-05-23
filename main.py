@@ -68,6 +68,21 @@ def createMain(name, fileName, className):
     fileOpen.write('}\n')
     fileOpen.close()
 
+def genMakeFile(name,fileName,className):
+    data=["COMPILATOR=g++\nFLAGS=-Wall -pedantic -Wextra -Weffc++ -Wstrict-null-sentinel\nSOURCES="]
+    temp=name+".cpp "
+    for value in fileName:
+        temp+=(value+".cpp ")
+    for value in className:
+        temp+=(value+".cpp ")
+    data.append(temp)
+    data.append("\nOBJECTS=$(SOURCES:.cpp=.o)\nEXECUTABLE=output\n\nall : $(SOURCES) $(EXECUTABLE)\n$(EXECUTABLE): $(OBJECTS)\n\t$(COMPILATOR)  $(OBJECTS) -o $@\n.cpp.o:\n\t$(COMPILATOR) $(FLAGS) -c $< -o $@\nclean:\n\trm -f *.o")
+
+    makeFile=name+"MakeFile"
+    outPut=open(makeFile,"w")
+    for value in data:
+        outPut.write(value)
+    outPut.close()
 
 def warning(errNum):
     if errNum == 0:
@@ -98,6 +113,7 @@ def main():
     createMain(mainName, fileNames, classNames)
     createFile(fileNames)
     createClass(classNames)
+    genMakeFile(mainName,fileNames,classNames)
 
 if __name__ == '__main__':
     main()
