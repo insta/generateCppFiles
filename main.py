@@ -1,6 +1,6 @@
 import sys
 def createMain(name, fileName, className):
-	fileOpen = open(name, w)
+	fileOpen = open(name+".cpp", w)
 	fileOpen.write('#include <iostream>')
 	fileOpen.write('\n')
 	for i in fileName:
