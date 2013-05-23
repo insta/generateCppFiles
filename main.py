@@ -24,12 +24,14 @@ def getArgs():
                 if arg in classNames or arg in fileNames:
                     warning(2)
                 else:
+                    arg = arg[0].upper() + arg[1:]
                     classNames.append(arg)
                     data = True
             elif flag == "f":
                 if arg in fileNames or arg in classNames:
                     warning(2)
                 else:
+                    arg = arg[0].upper() + arg[1:]
                     fileNames.append(arg)
                     data = True
             else:
@@ -37,7 +39,7 @@ def getArgs():
                     warning(0)
                 else:
                     mainName = arg
-                    counter += 1
+                    counter += 1  # On peut remplacer le compteur par un booléan
     if not data:
         warning(1)
     return mainName, classNames, fileNames
