@@ -14,3 +14,8 @@ TODO
 - Include hpp in other hpp
 - Create help #Done
 - Create makefile in the same time#Done
+
+
+IDEAS
+---------
+- Instead of puting all data in different lists, why not create a file containing all data that would be read during execution ?
