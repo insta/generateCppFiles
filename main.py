@@ -17,6 +17,8 @@ def getArgs():
             elif arg == "-f" or arg == "-F":
                 flag = "f"
                 data = False
+            elif arg=="-h" or arg=="-H":
+                helpFile()
             else:
                 warning(3)
         else:
@@ -78,8 +80,15 @@ def warning(errNum):
         print("Unknown flag occurence")
     else:
         print("I'm a teapot")
-    sys.exit(0)
+    helpFile()
 
+def helpFile():
+    print("This command is used to generate basic cpp and hpp files with all #includes pre-configure")
+    print("Command Arg1 -f Args1 -c Args2")
+    print("Arg1 : Name used for main.cpp file, default : main.cpp")
+    print("-f Args1 : generates basic cpp and hpp files for specified names")
+    print("-c Args2 : generates basic cpp and hpp class files")
+    sys.exit(0)
 
 def main():
     mainName, classNames, fileNames = getArgs()
