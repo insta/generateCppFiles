@@ -13,4 +13,4 @@ TODO
 - If main exist, append to start
 - Include hpp in other hpp
 - Create help #Done
-- Create makefile in the same time
+- Create makefile in the same time#Done
