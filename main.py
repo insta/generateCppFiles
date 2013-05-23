@@ -24,6 +24,8 @@ def warning(errNum):
 		print("Missing arguments after flag delaration")
 	elif errNum==2:
 		print("Double occurence of file")
+	elif errNum==3:
+		print("Unknown flag occurence")
 	else:
 		print("I'm a teapot")
 	sys.exit(0)
@@ -36,12 +38,15 @@ def main():
 	counter=1
 	data=True
 	for arg in sys.argv[1:]:
-		if arg=="-c" or arg=="-C":
-			flag="c"
-			data=False
-		elif arg=="-f" or arg=="-F":
-			flag="f"
-			data=False
+		if "-" in arg:
+			if arg=="-c" or arg=="-C":
+				flag="c"
+				data=False
+			elif arg=="-f" or arg=="-F":
+				flag="f"
+				data=False
+			else:
+				warning(3)
 		else:
 			if flag=="c":
 				if arg in classNames or arg in fileNames:
