@@ -44,21 +44,24 @@ def getArgs():
 
 
 def createMain(name, fileName, className):
-    fileOpen = open(name+".cpp", 'w')
-    fileOpen.write('#include <iostream>')
+    name += ".cpp"
+    fileOpen = open(name, 'w')
+    fileOpen.write('#include <iostream>\n')
     fileOpen.write('\n')
     for i in fileName:
-        fileOpen.write('#include "' + i + '.hpp"')
+        data = '#include "' + i + '.hpp"\n'
+        fileOpen.write(data)
     for i in className:
-        fileOpen.write('#include "' + i + 'i.hpp"')
+        data = '#include "' + i + '.hpp"\n'
+        fileOpen.write(data)
     fileOpen.write('\n')
-    fileOpen.write('using namespace std;')
+    fileOpen.write('using namespace std;\n')
     fileOpen.write('\n')
-    fileOpen.write('int main(int argc, char *argv[])')
-    fileOpen.write('{')
-    fileOpen.write('    cout << "Hello world!" << endl;')
-    fileOpen.write('    return 0;')
-    fileOpen.write('}')
+    fileOpen.write('int main(int argc, char *argv[])\n')
+    fileOpen.write('{\n')
+    fileOpen.write('    cout << "Hello world!" << endl;\n')
+    fileOpen.write('    return 0;\n')
+    fileOpen.write('}\n')
     fileOpen.close()
 
 
@@ -77,10 +80,11 @@ def warning(errNum):
 
 
 def main():
-    fileNames, classNames, mainName = getArgs()
+    mainName, classNames, fileNames = getArgs()
     print(fileNames)
     print(classNames)
     print(mainName)
+    createMain(mainName, fileNames, classNames)
 
 if __name__ == '__main__':
     main()
