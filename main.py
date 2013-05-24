@@ -15,6 +15,8 @@ def getArgs(knownFlags):
             inputData[len(inputData)-1].append(arg)
     if len(inputData[0]) > 2:
             warning(0)
+    elif len(inputData[0])==1:
+            inputData[0].append("main")
 
     tmp = []
     if len(inputData) > 1:
