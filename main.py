@@ -43,7 +43,7 @@ def createMain(data):
     for i in data[1:]:
         for j in i[1:]:
             output = '#include "' + j + '.hpp"\n'
-        fileOpen.write(data)
+            fileOpen.write(output)
 
     fileOpen.write('\n')
     fileOpen.write('using namespace std;\n')
@@ -56,15 +56,14 @@ def createMain(data):
     fileOpen.close()
 
 
-def genMakeFile(name, fileNames, classNames):
+def genMakeFile(inputData):
     data = readTemplate("makeFileTemplate")
     tmp = ""
-    for fileName in fileNames:
-        tmp += fileName+" "
-    for fileName in classNames:
-        tmp += fileName+" "
+    for typeData in inputData:
+        for fileName in typeData[1:]:
+            tmp += fileName+" "
     data[3] = "SOURCES="+tmp
-    output = open(name+"MakeFile", "w")
+    output = open(data[0][1]+"MakeFile", "w")
     for line in data:
         output.write(line)
     output.close()
@@ -104,14 +103,12 @@ def helpFile():
 
 def main():
     data = getArgs(["C", "F"])
-    print(fileNames)
-    print(classNames)
-    print(mainName)
+    print(data)
     createMain(data)
     for fileType in data[1:]:
         createFiles(fileType)
 
-    genMakeFile(mainName, fileNames, classNames)
+    genMakeFile(data)
 
 if __name__ == '__main__':
     main()
