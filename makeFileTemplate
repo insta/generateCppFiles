@@ -1,0 +1,18 @@
+COMPILATOR=g++
+FLAGS=-Wall -pedantic -Wextra -Weffc++ -Wstrict-null-sentinel
+
+SOURCES=main.cpp test.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=output
+
+all : $(SOURCES) $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(COMPILATOR)  $(OBJECTS) -o $@
+
+.cpp.o:
+	$(COMPILATOR) $(FLAGS) -c $< -o $@
+
+clean:
+	rm -f *.o
+
