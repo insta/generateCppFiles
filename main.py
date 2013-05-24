@@ -35,6 +35,8 @@ def getArgs(knownFlags):
 
 
 def createMain(data):
+    if len(data[0])==1:
+        data[0].append("main")
     data[0][1] += ".cpp"
     fileOpen = open(data[0][1], 'w')
     fileOpen.write('#include <iostream>\n')

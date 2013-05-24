@@ -14,7 +14,7 @@ TODO
 - Include hpp in other hpp
 - Create help #Done
 - Create makefile in the same time#Done
-- refactorise code and use templates for more modularity
+- refactorise code and use templates for more modularity#Done
 
 IDEAS
 ---------
