@@ -1,3 +1,3 @@
 clean:
-	rm *.cpp
-	rm *.hpp
+	@ rm *.cpp
+	@ rm *.hpp

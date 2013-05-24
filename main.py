@@ -3,7 +3,6 @@ from createFile import *
 
 
 def getArgs(knownFlags):
-    mainName = "main.cpp"
     inputData = [["m"]]
 
     for arg in sys.argv[1:]:
