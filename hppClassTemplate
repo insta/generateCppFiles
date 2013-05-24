@@ -1,0 +1,17 @@
+#IFNDEF template_HPP
+#DEFINE template_HPP
+
+#include <iostream>
+
+class template
+{
+    public:
+        template();
+        ~template();
+
+
+    private:
+};
+
+
+#ENDIF

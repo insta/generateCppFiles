@@ -68,22 +68,27 @@ def createMain(name, fileName, className):
     fileOpen.write('}\n')
     fileOpen.close()
 
-def genMakeFile(name,fileName,className):
-    data=["COMPILATOR=g++\nFLAGS=-Wall -pedantic -Wextra -Weffc++ -Wstrict-null-sentinel\nSOURCES="]
-    temp=name+".cpp "
-    for value in fileName:
-        temp+=(value+".cpp ")
-    for value in className:
-        temp+=(value+".cpp ")
-    data.append(temp)
-    data.append("\nOBJECTS=$(SOURCES:.cpp=.o)\nEXECUTABLE=output\n\nall : $(SOURCES) $(EXECUTABLE)\n$(EXECUTABLE): $(OBJECTS)\n\t$(COMPILATOR)  $(OBJECTS) -o $@\n.cpp.o:\n\t$(COMPILATOR) $(FLAGS) -c $< -o $@\nclean:\n\trm -f *.o")
+def genMakeFile(name,fileNames,classNames):
+    data=readTemplate("makeFileTemplate")
+    tmp=""
+    for fileName in fileNames:
+        tmp+=fileName+" "
+    for fileName in classNames:
+	tmp+=fileName+" "
+    data[3]="SOURCES="+tmp 
+    output=open(name+"MakeFile","w")
+    for line in data:
+        output.write(line)
+    output.close()
 
-    makeFile=name+"MakeFile"
-    outPut=open(makeFile,"w")
-    for value in data:
-        outPut.write(value)
-    outPut.close()
-
+def readTemplate(location):
+    template=open(location)
+    data=[]
+    for lines in template.readlines():
+        data.append(lines)
+    template.close()
+    return data
+		
 def warning(errNum):
     if errNum == 0:
         print("Flag missing")
@@ -111,8 +116,8 @@ def main():
     print(classNames)
     print(mainName)
     createMain(mainName, fileNames, classNames)
-    createFile(fileNames)
-    createClass(classNames)
+    createFiles(fileNames)
+    createFiles(classNames)
     genMakeFile(mainName,fileNames,classNames)
 
 if __name__ == '__main__':
