@@ -34,29 +34,6 @@ def getArgs(knownFlags):
     return inputData
 
 
-def createMain(data):
-    if len(data[0])==1:
-        data[0].append("main")
-    data[0][1] += ".cpp"
-    fileOpen = open(data[0][1], 'w')
-    fileOpen.write('#include <iostream>\n')
-    fileOpen.write('\n')
-    for i in data[1:]:
-        for j in i[1:]:
-            output = '#include "' + j + '.hpp"\n'
-            fileOpen.write(output)
-
-    fileOpen.write('\n')
-    fileOpen.write('using namespace std;\n')
-    fileOpen.write('\n')
-    fileOpen.write('int main(int argc, char *argv[])\n')
-    fileOpen.write('{\n')
-    fileOpen.write('    cout << "Hello world!" << endl;\n')
-    fileOpen.write('    return 0;\n')
-    fileOpen.write('}\n')
-    fileOpen.close()
-
-
 def genMakeFile(inputData):
     data = readTemplate("makeFileTemplate")
     tmp = ""
@@ -105,9 +82,10 @@ def helpFile():
 def main():
     data = getArgs(["C", "F"])
     print(data)
-    createMain(data)
+    include = []
     for fileType in data[1:]:
-        createFiles(fileType)
+        include.extend(createFiles(fileType))
+    createMain(data[0][1], include, "mainTemplate")
 
     genMakeFile(data)
 

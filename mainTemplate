@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "all"
 
 using namespace std;
 

@@ -1,5 +1,5 @@
-#IFNDEF template_HPP
-#DEFINE template_HPP
+#ifndef template_HPP
+#define template_HPP
 
 #include <iostream>
 
@@ -14,4 +14,4 @@ class template
 };
 
 
-#ENDIF
+#endif
