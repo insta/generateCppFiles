@@ -64,7 +64,7 @@ def genMakeFile(inputData):
         for fileName in typeData[1:]:
             tmp += fileName+" "
     data[3] = "SOURCES="+tmp
-    output = open(data[0][1]+"MakeFile", "w")
+    output = open("GCC"+"MakeFile", "w")
     for line in data:
         output.write(line)
     output.close()
