@@ -1,22 +1,25 @@
+from main import *
+
+
 def createFiles(fileNames):
     for fileName in fileNames[1:]:
-        if fileNames[0].upper()=="C":
-            createCpp(fileName,"cppClassTemplate")
-            createHpp(fileName,"hppClassTemplate")
-	else:
-            createCpp(fileName,"cppTemplate")
-            createHpp(fileName,"hppTemplate")
+        if fileNames[0].upper() == "C":
+            createCpp(fileName, "cppClassTemplate")
+            createHpp(fileName, "hppClassTemplate")
+    else:
+            createCpp(fileName, "cppTemplate")
+            createHpp(fileName, "hppTemplate")
 
 
-def createHpp(fileName,template):
-    data=readTemplate(template)
-    fileName+="_HPP\n"
-    data[0]=data[0][:8]+fileName
-    data[1]=data[1][:8]+fileName
+def createHpp(fileName, template):
+    data = readTemplate(template)
+    fileName += "_HPP\n"
+    data[0] = data[0][:8]+fileName
+    data[1] = data[1][:8]+fileName
     writeInFile(fileName + ".hpp", data)
 
 
-def createCpp(fileName,template):
+def createCpp(fileName, template):
     data = readTemplate(template)
     writeInFile(fileName+".cpp", data)
 
