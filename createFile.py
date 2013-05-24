@@ -13,9 +13,8 @@ def createFiles(fileNames):
 
 def createHpp(fileName, template):
     data = readTemplate(template)
-    fileName += "_HPP\n"
-    data[0] = data[0][:8]+fileName
-    data[1] = data[1][:8]+fileName
+    data[0] = data[0][:8]+fileName+"_HPP"
+    data[1] = data[1][:8]+fileName+"_HPP"
     writeInFile(fileName + ".hpp", data)
 
 
