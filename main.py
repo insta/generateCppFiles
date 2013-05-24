@@ -2,62 +2,49 @@ import sys
 from createFile import *
 
 
-def getArgs():
+def getArgs(knownFlags):
     mainName = "main.cpp"
-    classNames = []
-    fileNames = []
-    flag = ""
-    boolName = False
-    data = True
+    inputData=[["m"]]
+
     for arg in sys.argv[1:]:
         if "-" in arg:
-            if arg == "-c" or arg == "-C":
-                flag = "c"
-                data = False
-            elif arg == "-f" or arg == "-F":
-                flag = "f"
-                data = False
-            elif arg=="-h" or arg=="-H":
+            if arg=="-h" or arg=="-H":
                 helpFile()
             else:
-                warning(3)
+                inputData.append([arg[1:]])
         else:
-            if flag == "c":
-                if arg in classNames or arg in fileNames:
-                    warning(2)
+            inputData[len(inputData)-1)].append(arg)
+    if len(inputData[0]>2:
+        warning(0)
+
+    tmp=[]
+    if len(inputData)>1:
+        for dataType in inputData[1:]:
+            if dataType[0].upper() in knownFlags:
+                if len(dataType)>1:
+                    for name in dataType[1:]:
+                        if name in tmp:
+                            warning(2)
+                        else:
+                            tmp.append(name)
                 else:
-                    arg = arg[0].upper() + arg[1:]
-                    classNames.append(arg)
-                    data = True
-            elif flag == "f":
-                if arg in fileNames or arg in classNames:
-                    warning(2)
-                else:
-                    arg = arg[0].upper() + arg[1:]
-                    fileNames.append(arg)
-                    data = True
+                    warning(1)
             else:
-                if boolName:
-                    warning(0)
-                else:
-                    mainName = arg
-                    boolName = True
-    if not data:
-        warning(1)
-    return mainName, classNames, fileNames
+                warning(3)
+
+    return inputData
 
 
-def createMain(name, fileName, className):
-    name += ".cpp"
-    fileOpen = open(name, 'w')
+def createMain(data):
+    data[0][1] += ".cpp"
+    fileOpen = open(data[0][1], 'w')
     fileOpen.write('#include <iostream>\n')
     fileOpen.write('\n')
-    for i in fileName:
-        data = '#include "' + i + '.hpp"\n'
+    for i in data[1:]:
+        for j in i[1:]:
+        output = '#include "' + j + '.hpp"\n'
         fileOpen.write(data)
-    for i in className:
-        data = '#include "' + i + '.hpp"\n'
-        fileOpen.write(data)
+
     fileOpen.write('\n')
     fileOpen.write('using namespace std;\n')
     fileOpen.write('\n')
@@ -111,13 +98,14 @@ def helpFile():
     sys.exit(0)
 
 def main():
-    mainName, classNames, fileNames = getArgs()
+    data  = getArgs(["C","F"])
     print(fileNames)
     print(classNames)
     print(mainName)
-    createMain(mainName, fileNames, classNames)
-    createFiles(fileNames)
-    createFiles(classNames)
+    createMain(data)
+    for fileType in data[1:]:
+        createFiles(fileType)
+
     genMakeFile(mainName,fileNames,classNames)
 
 if __name__ == '__main__':
